@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050505;
+  --color-surface: rgba(255,255,255,0.05);
+  --color-border: rgba(255,255,255,0.08);
+
+  --font-sans: 'Inter', sans-serif;
+
+  --background-image-primary-gradient: linear-gradient(to right, #7C3AED, #8B5CF6, #A855F7);
+  --background-image-secondary-gradient: linear-gradient(to right, #06B6D4, #22D3EE);
+
+  --animate-blob: blob 7s infinite;
+  --animate-aurora: aurora 20s linear infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+  @keyframes aurora {
+    from { background-position: 50% 50%, 50% 50%; }
+    to { background-position: 350% 50%, 350% 50%; }
+  }
+  @keyframes shimmer {
+    from { transform: translateX(-150%); }
+    to { transform: translateX(150%); }
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-gray-200);
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+  ::selection {
+    background-color: rgba(168, 85, 247, 0.3);
+    color: white;
+  }
+}
+
+@utility glass {
+  background-color: var(--color-surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+@utility glass-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+}
+
+@utility text-gradient {
+  background-clip: text;
+  color: transparent;
+  background-image: var(--background-image-primary-gradient);
+}
+
+/* Aurora Background Effect */
+@utility aurora-bg {
+  background-image: 
+    radial-gradient(ellipse at 100% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
