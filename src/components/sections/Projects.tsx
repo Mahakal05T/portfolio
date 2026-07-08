@@ -4,26 +4,29 @@ import { Button } from '../ui/Button';
 import { ExternalLink } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import portfolioImg from '../../assets/portfolio.png';
+import userAuthImg from '../../assets/user-auth.png';
+import project2Img from '../../assets/project2.jpeg';
 
 const projects = [
   {
     title: 'Nexus UI',
     description: 'A premium, highly customizable component library for React. Built with Radix primitives and Tailwind CSS. Features over 40+ accessible components with fluid animations.',
-    image: 'src/assets/portfolio.png',
+    image: portfolioImg,
     tags: ['React', 'Tailwind', 'Framer Motion'],
     featured: true,
   },
   {
     title: 'Auth Systems',
     description: 'Real-time financial analytics dashboard with complex data visualization and predictive modeling integration.',
-    image: 'src/assets/user-auth.png',
+    image: userAuthImg,
     tags: ['Python', 'Mysql', 'Tailwind', 'Flask'],
     featured: false,
   },
   {
     title: 'Notes WebApp',
     description: 'SaaS platform allowing users to generate high-quality images using stable diffusion models. Includes subscription management.',
-    image: 'src/assets/project2.jpeg',
+    image: project2Img,
     tags: ['Javascipt', 'Tailwind', 'FastApi'],
     featured: false,
   }

@@ -4,6 +4,7 @@ import { Button } from '../ui/Button';
 import { Mail, ArrowRight } from 'lucide-react';
 import { FiGithub, FiTwitter, FiLinkedin } from 'react-icons/fi';
 import resume from '../../assets/Resume.pdf';
+import profileImg from '../../assets/ayush-sigh.jpg';
 
 
 export const Hero = () => {
@@ -31,7 +32,7 @@ export const Hero = () => {
         >
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-white/10 relative z-10">
             <img
-              src="src/assets/ayush-sigh.jpg"
+              src={profileImg}
               alt="Ayush Singh"
               className="w-full h-full object-cover"
             />
