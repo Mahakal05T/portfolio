@@ -15,6 +15,8 @@ const projects = [
     image: portfolioImg,
     tags: ['React', 'Tailwind', 'Framer Motion'],
     featured: true,
+    liveDemo: '#',
+    github: 'https://github.com/Mahakal05T/portfolio.git',
   },
   {
     title: 'Auth Systems',
@@ -22,6 +24,8 @@ const projects = [
     image: userAuthImg,
     tags: ['Python', 'Mysql', 'Tailwind', 'Flask'],
     featured: false,
+    liveDemo: 'https://auth-system-3-n1uz.onrender.com',
+    github: 'https://github.com/Mahakal05T/Auth-system.git',
   },
   {
     title: 'Notes WebApp',
@@ -29,6 +33,8 @@ const projects = [
     image: project2Img,
     tags: ['Javascipt', 'Tailwind', 'FastApi'],
     featured: false,
+    liveDemo: '#',
+    github: 'https://github.com/Mahakal05T/Notes-App.git',
   }
 ];
 
@@ -77,10 +83,24 @@ export const Projects = () => {
                   </p>
 
                   <div className="flex items-center gap-4 mt-auto">
-                    <Button variant="primary" className="py-2 px-4 text-sm gap-2">
+                    <Button 
+                      variant="primary" 
+                      className="py-2 px-4 text-sm gap-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (project.liveDemo && project.liveDemo !== '#') window.open(project.liveDemo, '_blank');
+                      }}
+                    >
                       <ExternalLink className="w-4 h-4" /> Live Demo
                     </Button>
-                    <Button variant="secondary" className="py-2 px-4 text-sm gap-2">
+                    <Button 
+                      variant="secondary" 
+                      className="py-2 px-4 text-sm gap-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (project.github && project.github !== '#') window.open(project.github, '_blank');
+                      }}
+                    >
                       <FiGithub className="w-4 h-4" /> Source
                     </Button>
                   </div>
