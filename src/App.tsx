@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import { Toaster } from 'react-hot-toast';
 import { AnimatedBackground } from './components/ui/AnimatedBackground';
 import { CursorGlow } from './components/ui/CursorGlow';
 import { Navbar } from './components/sections/Navbar';
@@ -37,6 +38,28 @@ function App() {
 
   return (
     <div className="min-h-screen text-gray-200">
+      <Toaster 
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: '#1a1a2e',
+            color: '#fff',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          },
+          success: {
+            iconTheme: {
+              primary: '#4ade80',
+              secondary: '#1a1a2e',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#f87171',
+              secondary: '#1a1a2e',
+            },
+          },
+        }}
+      />
       <AnimatedBackground />
       <CursorGlow />
       <Navbar />
