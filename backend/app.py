@@ -31,6 +31,9 @@ def create_app(config_class=Config):
 
     # Ensure tables are created
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+        except Exception as e:
+            print(f"Failed to create tables: {e}")
 
     return app
