@@ -15,6 +15,15 @@ class Config:
     elif SQLALCHEMY_DATABASE_URI.startswith("postgresql://") and not SQLALCHEMY_DATABASE_URI.startswith("postgresql+pg8000://"):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgresql://", "postgresql+pg8000://", 1)
         
+    # Render PostgreSQL requires SSL connection
+    import ssl
+    if "postgresql" in SQLALCHEMY_DATABASE_URI:
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            "connect_args": {
+                "ssl_context": ssl.create_default_context()
+            }
+        }
+        
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Resend API settings

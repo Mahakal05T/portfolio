@@ -60,10 +60,11 @@ export const Contact = () => {
       setSubmitStatus('success');
       toast.success('Message sent successfully!');
       reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setSubmitStatus('error');
-      toast.error('Failed to send message. Please try again.');
+      const errorMessage = error.response?.data?.error || 'Failed to send message. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
