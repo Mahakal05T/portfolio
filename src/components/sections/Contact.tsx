@@ -1,6 +1,5 @@
 import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
-import { Button } from '../ui/Button';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -64,46 +63,53 @@ export const Contact = () => {
             <GlassCard className="p-8">
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium text-gray-300">Your Name</label>
+                  <div className="relative group/input">
                     <input
                       type="text"
                       id="name"
-                      className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                      className="peer w-full bg-black/20 border border-white/10 rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors placeholder-transparent"
                       placeholder="Ayush Singh"
                     />
+                    <label htmlFor="name" className="absolute left-4 top-2 text-xs font-medium text-purple-400 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs peer-focus:text-purple-400 transition-all">Your Name</label>
                   </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-gray-300">Your Email</label>
+                  <div className="relative group/input">
                     <input
                       type="email"
                       id="email"
-                      className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                      className="peer w-full bg-black/20 border border-white/10 rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors placeholder-transparent"
                       placeholder="info@singhworks.com"
                     />
+                    <label htmlFor="email" className="absolute left-4 top-2 text-xs font-medium text-cyan-400 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400 transition-all">Your Email</label>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium text-gray-300">Subject</label>
+                <div className="relative group/input">
                   <input
                     type="text"
                     id="subject"
-                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                    className="peer w-full bg-black/20 border border-white/10 rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors placeholder-transparent"
                     placeholder="Project Inquiry"
                   />
+                  <label htmlFor="subject" className="absolute left-4 top-2 text-xs font-medium text-purple-400 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs peer-focus:text-purple-400 transition-all">Subject</label>
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-gray-300">Message</label>
+                <div className="relative group/input">
                   <textarea
                     id="message"
                     rows={5}
-                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors resize-none"
+                    className="peer w-full bg-black/20 border border-white/10 rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-none placeholder-transparent"
                     placeholder="Tell me about your project..."
                   />
+                  <label htmlFor="message" className="absolute left-4 top-2 text-xs font-medium text-cyan-400 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs peer-focus:text-cyan-400 transition-all">Message</label>
                 </div>
-                <Button variant="primary" className="w-full py-4 flex items-center justify-center gap-2">
-                  Send Message <Send className="w-4 h-4" />
-                </Button>
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 flex items-center justify-center gap-2 bg-primary-gradient text-white rounded-lg font-medium shadow-lg hover:shadow-purple-500/25 transition-all overflow-hidden relative group/btn"
+                >
+                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    Send Message <Send className="w-4 h-4 group-hover/btn:-translate-y-1 group-hover/btn:translate-x-1 transition-transform" />
+                  </span>
+                </motion.button>
               </form>
             </GlassCard>
           </motion.div>

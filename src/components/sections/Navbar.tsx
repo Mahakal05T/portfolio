@@ -8,13 +8,13 @@ const navItems = [
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#experience' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +22,39 @@ export const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observers = new Map();
+    
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    navItems.forEach(item => {
+      const id = item.href.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+        observers.set(id, element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   // Prevent scrolling when mobile menu is open
@@ -63,10 +96,16 @@ export const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+                className={cn(
+                  "text-sm font-medium transition-colors relative group",
+                  activeSection === item.href.substring(1) ? "text-white" : "text-gray-400 hover:text-white"
+                )}
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-purple-500 transition-all duration-300 group-hover:w-full" />
+                <span className={cn(
+                  "absolute -bottom-1 left-0 h-[2px] bg-purple-500 transition-all duration-300",
+                  activeSection === item.href.substring(1) ? "w-full" : "w-0 group-hover:w-full"
+                )} />
               </motion.a>
             ))}
           </nav>
@@ -101,7 +140,10 @@ export const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
                   onClick={() => setIsOpen(false)}
-                  className="text-2xl font-bold text-gray-300 hover:text-white hover:bg-white/5 transition-all w-full py-4 px-6 rounded-2xl"
+                  className={cn(
+                    "text-2xl font-bold transition-all w-full py-4 px-6 rounded-2xl hover:bg-white/5",
+                    activeSection === item.href.substring(1) ? "text-white bg-white/5" : "text-gray-400 hover:text-white"
+                  )}
                 >
                   {item.name}
                 </motion.a>

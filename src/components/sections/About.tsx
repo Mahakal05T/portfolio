@@ -2,11 +2,12 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
 import { Code2, MonitorPlay, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { AnimatedCounter } from '../ui/AnimatedCounter';
 
 const stats = [
-  { label: 'Years Experience', value: '0+', icon: Zap },
-  { label: 'Projects Completed', value: '3+', icon: MonitorPlay },
-  { label: 'Open Source Commits', value: '0+', icon: Code2 },
+  { label: 'Years Experience', value: 0, suffix: '+', icon: Zap },
+  { label: 'Projects Completed', value: 3, suffix: '+', icon: MonitorPlay },
+  { label: 'Open Source Commits', value: 0, suffix: '+', icon: Code2 },
 ];
 
 export const About = () => {
@@ -27,10 +28,10 @@ export const About = () => {
                   I'm a frontend developer with a deep passion for UI/UX design. I bridge the gap between aesthetics and functionality, creating digital experiences that are not only visually stunning but also technically robust.
                 </p>
                 <p>
-                  Over the past 8 years, I've had the privilege of working with industry-leading companies, helping them build enterprise-grade applications. My expertise lies in React ecosystem, complex state management, and crafting performant animations.
+                  I have been actively building my skills and working on various personal and freelance projects, focusing on modern web technologies. My expertise lies in the React ecosystem, responsive design, and crafting performant animations.
                 </p>
                 <p>
-                  When I'm not writing code, I'm usually exploring new design trends, contributing to open-source, or writing technical articles on modern web development.
+                  When I'm not writing code, I'm usually exploring new design trends, learning new technologies, or writing technical articles on modern web development. I am eager to bring my creativity and technical skills to a professional team.
                 </p>
               </div>
             </GlassCard>
@@ -50,7 +51,10 @@ export const About = () => {
                     <stat.icon className="w-6 h-6 text-purple-400" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-white">{stat.value}</div>
+                    <div className="text-3xl font-bold text-white flex items-center">
+                      <AnimatedCounter value={stat.value} />
+                      {stat.suffix}
+                    </div>
                     <div className="text-sm text-gray-400">{stat.label}</div>
                   </div>
                 </GlassCard>

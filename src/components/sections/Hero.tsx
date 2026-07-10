@@ -5,8 +5,7 @@ import { Mail, ArrowRight } from 'lucide-react';
 import { FiGithub, FiTwitter, FiLinkedin } from 'react-icons/fi';
 import resume from '../../assets/Resume.pdf';
 import profileImg from '../../assets/ayush-sigh.jpg';
-
-
+import { Hero3DObject } from '../3d/Hero3DObject';
 export const Hero = () => {
   const [text, setText] = useState('');
   const fullText = "Frontend developer & UI Designer";
@@ -23,6 +22,7 @@ export const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-6 relative">
+      <Hero3DObject />
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
