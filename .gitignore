@@ -41,3 +41,7 @@ dist-ssr
 # build and testing
 coverage/
 build/
+
+# Python
+__pycache__/
+instance/
