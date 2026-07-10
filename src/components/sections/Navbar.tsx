@@ -25,8 +25,6 @@ export const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const observers = new Map();
-    
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -48,7 +46,6 @@ export const Navbar = () => {
       const element = document.getElementById(id);
       if (element) {
         observer.observe(element);
-        observers.set(id, element);
       }
     });
 

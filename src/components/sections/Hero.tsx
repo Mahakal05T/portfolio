@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Mail, ArrowRight } from 'lucide-react';
-import { FiGithub, FiTwitter, FiLinkedin } from 'react-icons/fi';
+import { FiGithub } from 'react-icons/fi';
 import resume from '../../assets/Resume.pdf';
 import profileImg from '../../assets/ayush-sigh.jpg';
 import { Hero3DObject } from '../3d/Hero3DObject';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 export const Hero = () => {
   const [text, setText] = useState('');
   const fullText = "Frontend developer & UI Designer";
@@ -22,7 +23,9 @@ export const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-6 relative">
-      <Hero3DObject />
+      <ErrorBoundary>
+        <Hero3DObject />
+      </ErrorBoundary>
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -82,10 +85,15 @@ export const Hero = () => {
           transition={{ delay: 0.6 }}
           className="flex items-center gap-6"
         >
-          {[FiGithub, FiTwitter, FiLinkedin, Mail].map((Icon, i) => (
+          {[
+            { Icon: FiGithub, href: 'https://github.com/Mahakal05T' },
+            { Icon: Mail, href: 'mailto:vinodsingh47928@gmail.com' },
+          ].map(({ Icon, href }, i) => (
             <a
               key={i}
-              href="#"
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               className="text-gray-400 hover:text-white transition-colors hover:-translate-y-1 transform duration-200"
             >
               <Icon className="w-6 h-6" />

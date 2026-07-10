@@ -13,9 +13,8 @@ export const Footer = () => {
         </div>
         
         <div className="flex items-center gap-6">
-          <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Twitter</a>
-          <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">GitHub</a>
-          <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+          <a href="https://github.com/Mahakal05T" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-white transition-colors">GitHub</a>
+          <a href="mailto:vinodsingh47928@gmail.com" className="text-sm text-gray-400 hover:text-white transition-colors">Email</a>
         </div>
         
         <button 

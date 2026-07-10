@@ -11,8 +11,8 @@ import project2Img from '../../assets/project2.jpeg';
 
 const projects = [
   {
-    title: 'Nexus UI',
-    description: 'A premium, highly customizable component library for React. Built with Radix primitives and Tailwind CSS. Features over 40+ accessible components with fluid animations.',
+    title: 'Portfolio Website',
+    description: 'A premium, modern developer portfolio built with React, Three.js, and Framer Motion. Features glassmorphism design, 3D animated hero section, smooth scroll, and a full-stack contact form with email notifications.',
     image: portfolioImg,
     tags: ['React', 'Tailwind', 'Framer Motion'],
     featured: true,
@@ -21,18 +21,18 @@ const projects = [
   },
   {
     title: 'Auth Systems',
-    description: 'Real-time financial analytics dashboard with complex data visualization and predictive modeling integration.',
+    description: 'A secure user authentication system with registration, login, session management, and password hashing. Built with Flask and MySQL with a clean, responsive Tailwind CSS frontend.',
     image: userAuthImg,
-    tags: ['Python', 'Mysql', 'Tailwind', 'Flask'],
+    tags: ['Python', 'MySQL', 'Tailwind', 'Flask'],
     featured: false,
     liveDemo: 'https://auth-system-3-n1uz.onrender.com',
     github: 'https://github.com/Mahakal05T/Auth-system.git',
   },
   {
     title: 'Notes WebApp',
-    description: 'SaaS platform allowing users to generate high-quality images using stable diffusion models. Includes subscription management.',
+    description: 'A full-featured notes management application for creating, editing, organizing, and deleting personal notes. Features a clean UI with real-time updates and a fast backend API.',
     image: project2Img,
-    tags: ['Javascipt', 'Tailwind', 'FastApi'],
+    tags: ['JavaScript', 'Tailwind', 'FastAPI'],
     featured: false,
     liveDemo: '#',
     github: 'https://github.com/Mahakal05T/Notes-App.git',

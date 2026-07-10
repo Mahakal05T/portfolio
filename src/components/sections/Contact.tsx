@@ -60,10 +60,11 @@ export const Contact = () => {
       setSubmitStatus('success');
       toast.success('Message sent successfully!');
       reset();
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
       setSubmitStatus('error');
-      const errorMessage = error.response?.data?.error || 'Failed to send message. Please try again.';
+      const axiosError = error as { response?: { data?: { error?: string } } };
+      const errorMessage = axiosError.response?.data?.error || 'Failed to send message. Please try again.';
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -195,15 +196,13 @@ export const Contact = () => {
                           value={values.name}
                           onChange={(e) => handleChange('name', e.target.value)}
                           onBlur={() => handleBlur('name')}
-                          className={`peer w-full bg-black/20 border ${
-                            touched.name && errors.name ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-purple-500 focus:ring-purple-500'
-                          } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors placeholder-transparent disabled:opacity-50`}
+                          className={`peer w-full bg-black/20 border ${touched.name && errors.name ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-purple-500 focus:ring-purple-500'
+                            } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors placeholder-transparent disabled:opacity-50`}
                           placeholder="Ayush Singh"
                           disabled={isSubmitting}
                         />
-                        <label htmlFor="name" className={`absolute left-4 top-2 text-xs font-medium ${
-                          touched.name && errors.name ? 'text-red-400' : 'text-purple-400 peer-focus:text-purple-400'
-                        } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
+                        <label htmlFor="name" className={`absolute left-4 top-2 text-xs font-medium ${touched.name && errors.name ? 'text-red-400' : 'text-purple-400 peer-focus:text-purple-400'
+                          } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
                           Your Name
                         </label>
                         {touched.name && errors.name && (
@@ -218,15 +217,13 @@ export const Contact = () => {
                           value={values.email}
                           onChange={(e) => handleChange('email', e.target.value)}
                           onBlur={() => handleBlur('email')}
-                          className={`peer w-full bg-black/20 border ${
-                            touched.email && errors.email ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-cyan-500 focus:ring-cyan-500'
-                          } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors placeholder-transparent disabled:opacity-50`}
+                          className={`peer w-full bg-black/20 border ${touched.email && errors.email ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-cyan-500 focus:ring-cyan-500'
+                            } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors placeholder-transparent disabled:opacity-50`}
                           placeholder="info@singhworks.com"
                           disabled={isSubmitting}
                         />
-                        <label htmlFor="email" className={`absolute left-4 top-2 text-xs font-medium ${
-                          touched.email && errors.email ? 'text-red-400' : 'text-cyan-400 peer-focus:text-cyan-400'
-                        } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
+                        <label htmlFor="email" className={`absolute left-4 top-2 text-xs font-medium ${touched.email && errors.email ? 'text-red-400' : 'text-cyan-400 peer-focus:text-cyan-400'
+                          } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
                           Your Email
                         </label>
                         {touched.email && errors.email && (
@@ -242,15 +239,13 @@ export const Contact = () => {
                         value={values.subject}
                         onChange={(e) => handleChange('subject', e.target.value)}
                         onBlur={() => handleBlur('subject')}
-                        className={`peer w-full bg-black/20 border ${
-                          touched.subject && errors.subject ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-purple-500 focus:ring-purple-500'
-                        } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors placeholder-transparent disabled:opacity-50`}
+                        className={`peer w-full bg-black/20 border ${touched.subject && errors.subject ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-purple-500 focus:ring-purple-500'
+                          } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors placeholder-transparent disabled:opacity-50`}
                         placeholder="Project Inquiry"
                         disabled={isSubmitting}
                       />
-                      <label htmlFor="subject" className={`absolute left-4 top-2 text-xs font-medium ${
-                        touched.subject && errors.subject ? 'text-red-400' : 'text-purple-400 peer-focus:text-purple-400'
-                      } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
+                      <label htmlFor="subject" className={`absolute left-4 top-2 text-xs font-medium ${touched.subject && errors.subject ? 'text-red-400' : 'text-purple-400 peer-focus:text-purple-400'
+                        } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
                         Subject
                       </label>
                       {touched.subject && errors.subject && (
@@ -265,15 +260,13 @@ export const Contact = () => {
                         value={values.message}
                         onChange={(e) => handleChange('message', e.target.value)}
                         onBlur={() => handleBlur('message')}
-                        className={`peer w-full bg-black/20 border ${
-                          touched.message && errors.message ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-cyan-500 focus:ring-cyan-500'
-                        } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors resize-none placeholder-transparent disabled:opacity-50`}
+                        className={`peer w-full bg-black/20 border ${touched.message && errors.message ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500' : 'border-white/10 focus:border-cyan-500 focus:ring-cyan-500'
+                          } rounded-lg px-4 pt-6 pb-2 text-white focus:outline-none focus:ring-1 transition-colors resize-none placeholder-transparent disabled:opacity-50`}
                         placeholder="Tell me about your project..."
                         disabled={isSubmitting}
                       />
-                      <label htmlFor="message" className={`absolute left-4 top-2 text-xs font-medium ${
-                        touched.message && errors.message ? 'text-red-400' : 'text-cyan-400 peer-focus:text-cyan-400'
-                      } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
+                      <label htmlFor="message" className={`absolute left-4 top-2 text-xs font-medium ${touched.message && errors.message ? 'text-red-400' : 'text-cyan-400 peer-focus:text-cyan-400'
+                        } peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-4 peer-focus:top-2 peer-focus:text-xs transition-all`}>
                         Message
                       </label>
                       <div className="absolute right-2 bottom-6 text-xs text-gray-500">
@@ -287,7 +280,7 @@ export const Contact = () => {
                       )}
                     </div>
 
-                    <motion.button 
+                    <motion.button
                       whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                       whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                       disabled={isSubmitting}

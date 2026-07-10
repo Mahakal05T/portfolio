@@ -34,7 +34,7 @@ function App() {
       <CursorGlow />
       <Routes>
         <Route path="/" element={<Portfolio />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/dashboard-panel" element={<Admin />} />
       </Routes>
     </div>
   );

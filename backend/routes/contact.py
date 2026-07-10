@@ -61,4 +61,4 @@ def submit_contact():
         db.session.rollback()
         # Log error in production
         print(f"Error saving contact message: {e}")
-        return jsonify({"error": f"Failed to process request: {str(e)}"}), 500
+        return jsonify({"error": "Failed to process request"}), 500
