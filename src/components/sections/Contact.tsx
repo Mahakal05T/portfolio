@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
-import { Mail, MapPin, Phone, Send, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, CheckCircle, XCircle} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFormValidation } from '../../hooks/useFormValidation';
 import { submitContact } from '../../services/api';
