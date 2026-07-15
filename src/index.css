@@ -2,14 +2,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #050505;
-  --color-surface: rgba(255,255,255,0.05);
-  --color-border: rgba(255,255,255,0.08);
+  --color-background: #030303;
+  --color-surface: rgba(255,255,255,0.03);
+  --color-border: rgba(255,255,255,0.05);
 
   --font-sans: 'Inter', sans-serif;
 
-  --background-image-primary-gradient: linear-gradient(to right, #7C3AED, #8B5CF6, #A855F7);
-  --background-image-secondary-gradient: linear-gradient(to right, #06B6D4, #22D3EE);
+  --background-image-primary-gradient: linear-gradient(135deg, #7C3AED, #8B5CF6, #A855F7);
+  --background-image-secondary-gradient: linear-gradient(135deg, #06B6D4, #22D3EE);
 
   --animate-blob: blob 7s infinite;
   --animate-aurora: aurora 20s linear infinite;
@@ -26,8 +26,8 @@
     to { background-position: 350% 50%, 350% 50%; }
   }
   @keyframes shimmer {
-    from { transform: translateX(-150%); }
-    to { transform: translateX(150%); }
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 
@@ -47,15 +47,17 @@
 
 @utility glass {
   background-color: var(--color-surface);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
 }
 
 @utility glass-card {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 @utility text-gradient {
@@ -67,16 +69,28 @@
 /* Aurora Background Effect */
 @utility aurora-bg {
   background-image: 
-    radial-gradient(ellipse at 100% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 0% 100%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at 80% 0%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 100%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+}
+
+/* Skeleton Loading Shimmer */
+@utility shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);

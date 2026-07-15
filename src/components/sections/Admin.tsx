@@ -4,6 +4,8 @@ import { GlassCard } from '../ui/GlassCard';
 import { Shield, Mail, Trash2, CheckCircle, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
 
 interface Message {
   id: number;
@@ -122,13 +124,14 @@ export const Admin = () => {
         <div className="flex justify-between items-center mb-12">
           <SectionHeading title="Admin Dashboard" subtitle="Manage your contact messages" />
           {isAuthenticated && (
-            <button 
+            <Button 
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors"
+              variant="outline"
+              className="bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/20 hover:text-red-300"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-4 h-4 mr-2" />
               Logout
-            </button>
+            </Button>
           )}
         </div>
 
@@ -138,30 +141,28 @@ export const Admin = () => {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-md mx-auto"
           >
-            <GlassCard className="p-8">
+            <GlassCard className="p-8 border-white/5 shadow-2xl shadow-purple-500/10">
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
-                  <Shield className="w-8 h-8 text-blue-400" />
+                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-purple-500/20 to-cyan-500/20 flex items-center justify-center border border-white/10 shadow-lg">
+                  <Shield className="w-10 h-10 text-purple-400" />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-white text-center mb-6">Admin Login</h3>
-              <form onSubmit={handleLogin} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">API Key</label>
-                  <input
-                    type="password"
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all"
-                    placeholder="Enter ADMIN_API_KEY"
-                  />
-                </div>
-                <button
+              <h3 className="text-2xl font-bold text-white text-center mb-8">Admin Access</h3>
+              <form onSubmit={handleLogin} className="space-y-6">
+                <Input
+                  id="apiKey"
+                  type="password"
+                  label="Enter API Key"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                />
+                <Button
                   type="submit"
-                  className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg shadow-blue-500/25"
+                  variant="gradient"
+                  className="w-full py-3 text-base"
                 >
-                  Access Dashboard
-                </button>
+                  Authenticate
+                </Button>
               </form>
             </GlassCard>
           </motion.div>
@@ -170,66 +171,70 @@ export const Admin = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <GlassCard className="p-6">
+            <GlassCard className="p-0 overflow-hidden border-white/5">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-white/10 text-gray-400 text-sm">
-                      <th className="py-4 px-4 font-medium">Status</th>
-                      <th className="py-4 px-4 font-medium">Date</th>
-                      <th className="py-4 px-4 font-medium">Name & Email</th>
-                      <th className="py-4 px-4 font-medium">Message</th>
-                      <th className="py-4 px-4 font-medium text-right">Actions</th>
+                    <tr className="border-b border-white/5 bg-white/5 text-gray-400 text-sm uppercase tracking-wider font-semibold">
+                      <th className="py-5 px-6">Status</th>
+                      <th className="py-5 px-6">Date</th>
+                      <th className="py-5 px-6">Name & Email</th>
+                      <th className="py-5 px-6">Message</th>
+                      <th className="py-5 px-6 text-right">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {isLoading ? (
                       <tr>
-                        <td colSpan={5} className="py-12 text-center text-gray-400">
-                          <div className="flex flex-col items-center justify-center gap-3">
-                            <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                            Loading messages...
+                        <td colSpan={5} className="py-16 text-center text-gray-400">
+                          <div className="flex flex-col items-center justify-center gap-4">
+                            <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                            Loading secure messages...
                           </div>
                         </td>
                       </tr>
                     ) : messages.length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="py-12 text-center text-gray-400">
-                          <Mail className="w-12 h-12 mx-auto mb-3 opacity-20" />
-                          No messages found.
+                        <td colSpan={5} className="py-16 text-center text-gray-400">
+                          <Mail className="w-16 h-16 mx-auto mb-4 opacity-20" />
+                          <p className="text-lg">Inbox is empty</p>
                         </td>
                       </tr>
                     ) : (
                       messages.map((msg) => (
-                        <tr key={msg.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
-                          <td className="py-4 px-4">
+                        <tr key={msg.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
+                          <td className="py-5 px-6">
                             <button
                               onClick={() => updateStatus(msg.id, msg.status)}
-                              className={`flex items-center gap-2 text-xs px-2 py-1 rounded-full ${
+                              className={`flex items-center gap-2 text-xs px-3 py-1.5 rounded-full font-medium transition-all ${
                                 msg.status === 'Unread' 
-                                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
-                                  : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                                  ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]' 
+                                  : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'
                               }`}
                             >
-                              {msg.status === 'Unread' ? <CheckCircle className="w-3 h-3" /> : <CheckCircle className="w-3 h-3" />}
+                              <CheckCircle className="w-3.5 h-3.5" />
                               {msg.status}
                             </button>
                           </td>
-                          <td className="py-4 px-4 text-sm text-gray-400 whitespace-nowrap">
-                            {new Date(msg.created_at).toLocaleDateString()}
+                          <td className="py-5 px-6 text-sm text-gray-400 whitespace-nowrap font-light">
+                            {new Date(msg.created_at).toLocaleDateString(undefined, {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric'
+                            })}
                           </td>
-                          <td className="py-4 px-4">
-                            <div className="text-white font-medium">{msg.name}</div>
+                          <td className="py-5 px-6">
+                            <div className="text-white font-medium mb-1">{msg.name}</div>
                             <div className="text-sm text-gray-500">{msg.email}</div>
                           </td>
-                          <td className="py-4 px-4">
-                            <div className="text-sm text-gray-300 font-medium mb-1">{msg.subject}</div>
-                            <div className="text-sm text-gray-400 line-clamp-2 max-w-md">{msg.message}</div>
+                          <td className="py-5 px-6">
+                            <div className="text-sm text-white font-medium mb-1">{msg.subject}</div>
+                            <div className="text-sm text-gray-400 line-clamp-2 max-w-lg font-light leading-relaxed">{msg.message}</div>
                           </td>
-                          <td className="py-4 px-4 text-right">
+                          <td className="py-5 px-6 text-right">
                             <button
                               onClick={() => deleteMessage(msg.id)}
-                              className="p-2 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                              className="p-2 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                               title="Delete Message"
                             >
                               <Trash2 className="w-5 h-5" />

@@ -6,6 +6,7 @@ import { cn } from '../../lib/utils';
 const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
@@ -19,38 +20,29 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  useEffect(() => {
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+      const sections = navItems
+        .map(item => document.getElementById(item.href.substring(1)))
+        .filter((el): el is HTMLElement => el !== null);
+
+      let currentActive = 'home';
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 3) {
+          currentActive = section.id;
         }
-      });
-    };
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    navItems.forEach(item => {
-      const id = item.href.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
       }
-    });
+      setActiveSection(currentActive);
+    };
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check after a slight delay to account for lazy-loaded components
+    const timer = setTimeout(handleScroll, 500);
+    
     return () => {
-      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -70,8 +62,8 @@ export const Navbar = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
-          scrolled ? "glass py-4 border-white/10" : "py-6 bg-transparent"
+          "fixed top-0 w-full z-50 transition-all duration-500 border-b border-transparent",
+          scrolled ? "bg-background/70 backdrop-blur-xl border-white/5 py-4 shadow-2xl shadow-black/50" : "py-6 bg-transparent"
         )}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -79,32 +71,38 @@ export const Navbar = () => {
             href="#home"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-xl font-bold tracking-tighter text-white z-50 relative"
+            className="text-xl font-bold tracking-tighter text-white z-50 relative group"
             onClick={() => setIsOpen(false)}
           >
-            Singh<span className="text-purple-500">Works</span>
+            Singh<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:opacity-80 transition-opacity">Works</span>
           </motion.a>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item, i) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className={cn(
-                  "text-sm font-medium transition-colors relative group",
-                  activeSection === item.href.substring(1) ? "text-white" : "text-gray-400 hover:text-white"
-                )}
-              >
-                {item.name}
-                <span className={cn(
-                  "absolute -bottom-1 left-0 h-[2px] bg-purple-500 transition-all duration-300",
-                  activeSection === item.href.substring(1) ? "w-full" : "w-0 group-hover:w-full"
-                )} />
-              </motion.a>
-            ))}
+          <nav className="hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/10">
+            {navItems.map((item, i) => {
+              const isActive = activeSection === item.href.substring(1);
+              return (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className={cn(
+                    "px-4 py-2 text-sm font-medium transition-colors relative rounded-full",
+                    isActive ? "text-white" : "text-gray-400 hover:text-white hover:bg-white/5"
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeSection"
+                      className="absolute inset-0 bg-white/10 rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.name}</span>
+                </motion.a>
+              );
+            })}
           </nav>
           
           <motion.div 
@@ -123,28 +121,31 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col pt-24 pb-8 px-6 overflow-y-auto"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)", transition: { duration: 0.3 } }}
+            className="fixed inset-0 z-40 bg-black/60 md:hidden flex flex-col pt-24 pb-8 px-6 overflow-y-auto"
           >
             <nav className="flex flex-col gap-2 w-full mt-8">
-              {navItems.map((item, i) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "text-2xl font-bold transition-all w-full py-4 px-6 rounded-2xl hover:bg-white/5",
-                    activeSection === item.href.substring(1) ? "text-white bg-white/5" : "text-gray-400 hover:text-white"
-                  )}
-                >
-                  {item.name}
-                </motion.a>
-              ))}
+              {navItems.map((item, i) => {
+                const isActive = activeSection === item.href.substring(1);
+                return (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "text-2xl font-bold transition-all w-full py-4 px-6 rounded-2xl",
+                      isActive ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 bg-white/5" : "text-gray-400 hover:text-white hover:bg-white/5"
+                    )}
+                  >
+                    {item.name}
+                  </motion.a>
+                );
+              })}
             </nav>
           </motion.div>
         )}

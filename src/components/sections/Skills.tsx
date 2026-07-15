@@ -27,21 +27,21 @@ export const Skills = () => {
           subtitle="My technical toolkit for building scalable and modern web applications."
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 mt-12">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.05, duration: 0.5 }}
-              className="group relative p-[1px] rounded-2xl bg-gradient-to-b from-white/10 to-transparent overflow-hidden"
-              whileHover={{ y: -5, rotate: 2 }}
+              className="group relative rounded-2xl bg-white/5 border border-white/5 overflow-hidden backdrop-blur-sm hover:border-white/20 transition-all duration-300"
+              whileHover={{ y: -5 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative h-full bg-background/90 backdrop-blur-xl border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center gap-4 transition-colors duration-500 group-hover:bg-white/5">
-                <skill.icon className={`w-10 h-10 ${skill.color} drop-shadow-lg group-hover:scale-110 transition-transform duration-300`} />
-                <span className="text-sm font-medium text-gray-300 text-center">{skill.name}</span>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="relative h-full p-6 flex flex-col items-center justify-center gap-4 transition-colors duration-500">
+                <skill.icon className={`w-10 h-10 ${skill.color} drop-shadow-md group-hover:scale-110 group-hover:drop-shadow-xl transition-all duration-300`} />
+                <span className="text-sm font-medium text-gray-400 group-hover:text-white transition-colors duration-300 text-center">{skill.name}</span>
               </div>
             </motion.div>
           ))}
