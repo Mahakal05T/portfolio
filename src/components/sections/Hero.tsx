@@ -99,12 +99,12 @@ export const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Floating Social Icons on the right */}
+      {/* Floating Social Icons */}
       <motion.div 
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="hidden md:flex flex-col items-center gap-6 absolute right-8 top-1/2 -translate-y-1/2 z-20"
+        className="hidden lg:flex flex-col items-center gap-6 absolute right-8 top-1/2 -translate-y-1/2 z-20"
       >
         {[
           { Icon: FiGithub, href: 'https://github.com/Mahakal05T' },
@@ -118,21 +118,11 @@ export const Hero = () => {
             href={href}
             target={href.startsWith('http') ? '_blank' : undefined}
             rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-x-1 transform duration-300 shadow-lg shadow-black/20"
+            className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-1 lg:hover:translate-y-0 lg:hover:-translate-x-1 transform duration-300 shadow-lg shadow-black/20"
           >
-            <Icon className="w-5 h-5" />
+            <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
           </motion.a>
         ))}
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500"
-      >
-        <div className="w-[30px] h-[50px] rounded-full border border-gray-500/50 flex justify-center p-2 backdrop-blur-md bg-white/5">
-          <div className="w-1 h-3 bg-gradient-to-b from-gray-400 to-transparent rounded-full" />
-        </div>
       </motion.div>
     </section>
   );

@@ -10,7 +10,6 @@ const About = React.lazy(() => import('./About').then(module => ({ default: modu
 const Skills = React.lazy(() => import('./Skills').then(module => ({ default: module.Skills })));
 const Projects = React.lazy(() => import('./Projects').then(module => ({ default: module.Projects })));
 const Services = React.lazy(() => import('./Services').then(module => ({ default: module.Services })));
-const Experience = React.lazy(() => import('./Experience').then(module => ({ default: module.Experience })));
 const Contact = React.lazy(() => import('./Contact').then(module => ({ default: module.Contact })));
 
 const SectionLoader = () => (
@@ -56,10 +55,6 @@ export const Portfolio = () => {
         
         <Suspense fallback={<SectionLoader />}>
           <About />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <Experience />
         </Suspense>
         
         <Suspense fallback={<SectionLoader />}>

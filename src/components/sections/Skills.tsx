@@ -1,7 +1,7 @@
 import { SectionHeading } from '../ui/SectionHeading';
 import { motion } from 'framer-motion';
-import { FaReact, FaNodeJs, FaPython, FaDocker, FaFigma } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss, SiNextdotjs, SiMongodb, SiPostgresql, SiFirebase, SiFramer } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaPython, FaFigma } from 'react-icons/fa';
+import { SiTypescript, SiTailwindcss, SiNextdotjs, SiMongodb, SiMysql, SiFramer } from 'react-icons/si';
 
 const skills = [
   { name: 'React', icon: FaReact, color: 'text-blue-400' },
@@ -12,9 +12,7 @@ const skills = [
   { name: 'Node.js', icon: FaNodeJs, color: 'text-green-500' },
   { name: 'Python', icon: FaPython, color: 'text-yellow-400' },
   { name: 'MongoDB', icon: SiMongodb, color: 'text-green-400' },
-  { name: 'PostgreSQL', icon: SiPostgresql, color: 'text-blue-300' },
-  { name: 'Firebase', icon: SiFirebase, color: 'text-yellow-500' },
-  { name: 'Docker', icon: FaDocker, color: 'text-blue-600' },
+  { name: 'MySQL', icon: SiMysql, color: 'text-blue-300', size: '' },
   { name: 'Figma', icon: FaFigma, color: 'text-pink-400' },
 ];
 

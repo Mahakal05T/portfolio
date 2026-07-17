@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import { AnimatedCounter } from '../ui/AnimatedCounter';
 
 const stats = [
-  { label: 'Years Experience', value: 3, suffix: '+', icon: Zap },
-  { label: 'Projects Completed', value: 15, suffix: '+', icon: MonitorPlay },
-  { label: 'Open Source Commits', value: 200, suffix: '+', icon: Code2 },
+  { label: 'Years Experience', value: 0, suffix: '+', icon: Zap },
+  { label: 'Projects Completed', value: 2, suffix: '+', icon: MonitorPlay },
+  { label: 'Open Source Commits', value: 0, suffix: '+', icon: Code2 },
 ];
 
 export const About = () => {
