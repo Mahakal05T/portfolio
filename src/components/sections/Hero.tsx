@@ -97,25 +97,32 @@ export const Hero = () => {
             Download Resume
           </Button>
         </motion.div>
+      </motion.div>
 
-        <motion.div variants={itemVariants} className="flex items-center gap-6">
-          {[
-            { Icon: FiGithub, href: 'https://github.com/Mahakal05T' },
-            { Icon: FaLinkedin, href: '#' },
-            { Icon: FaXTwitter, href: '#' },
-            { Icon: Mail, href: 'mailto:vinodsingh47928@gmail.com' },
-          ].map(({ Icon, href }, i) => (
-            <a
-              key={i}
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-1 transform duration-300 shadow-lg shadow-black/20"
-            >
-              <Icon className="w-5 h-5" />
-            </a>
-          ))}
-        </motion.div>
+      {/* Floating Social Icons on the right */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="hidden md:flex flex-col items-center gap-6 absolute right-8 top-1/2 -translate-y-1/2 z-20"
+      >
+        {[
+          { Icon: FiGithub, href: 'https://github.com/Mahakal05T' },
+          { Icon: FaLinkedin, href: '#' },
+          { Icon: FaXTwitter, href: '#' },
+          { Icon: Mail, href: 'mailto:vinodsingh47928@gmail.com' },
+        ].map(({ Icon, href }, i) => (
+          <motion.a
+            key={i}
+            variants={itemVariants}
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-x-1 transform duration-300 shadow-lg shadow-black/20"
+          >
+            <Icon className="w-5 h-5" />
+          </motion.a>
+        ))}
       </motion.div>
 
       <motion.div
