@@ -25,7 +25,7 @@ const projects = [
     image: userAuthImg,
     tags: ['Python', 'MySQL', 'Tailwind', 'Flask'],
     featured: false,
-    liveDemo: 'https://auth-system-3-n1uz.onrender.com',
+    liveDemo: 'https://auth-system-frontend-t5ko.onrender.com/login',
     github: 'https://github.com/Mahakal05T/Auth-system.git',
   },
   {
