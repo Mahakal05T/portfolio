@@ -15,7 +15,7 @@ const AnimatedSphere = () => {
 
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={2} floatingRange={[-0.1, 0.1]}>
-      <Sphere ref={sphereRef} args={[1, 64, 64]} scale={1.5}>
+      <Sphere ref={sphereRef} args={[1, 32, 32]} scale={1.5}>
         <MeshDistortMaterial
           color="#7C3AED"
           attach="material"
@@ -34,7 +34,11 @@ const AnimatedSphere = () => {
 export const Hero3DObject = () => {
   return (
     <div className="absolute top-0 right-0 w-full h-full md:w-1/2 -z-10 opacity-60 pointer-events-none hidden md:block">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        dpr={[1, 1.5]}
+        gl={{ powerPreference: "high-performance", antialias: false }}
+      >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#06B6D4" />
