@@ -6,7 +6,7 @@ import { AnimatedCounter } from '../ui/AnimatedCounter';
 
 const stats = [
   { label: 'Years Experience', value: 0, suffix: '+', icon: Zap },
-  { label: 'Projects Completed', value: 2, suffix: '+', icon: MonitorPlay },
+  { label: 'Projects Completed', value: 5, suffix: '+', icon: MonitorPlay },
   { label: 'Open Source Commits', value: 0, suffix: '+', icon: Code2 },
 ];
 
@@ -32,7 +32,7 @@ export const About = () => {
               <h3 className="text-3xl font-bold text-white mb-6">Engineering at the edge of design.</h3>
               <div className="space-y-6 text-gray-400 leading-relaxed text-lg font-light">
                 <p>
-                  I'm a frontend developer with a deep passion for UI/UX design. I bridge the gap between aesthetics and functionality, creating digital experiences that are not only visually stunning but also technically robust.
+                  I'm a frontend developer, UI designer, and data analyst. I bridge the gap between aesthetics, functionality, and data-driven insights, creating digital experiences that are not only visually stunning but also technically robust and analytically sound.
                 </p>
                 <p>
                   I have been actively building my skills and working on various personal and freelance projects, focusing on modern web technologies. My expertise lies in the React ecosystem, responsive design, and crafting performant animations.

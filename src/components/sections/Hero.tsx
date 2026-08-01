@@ -11,7 +11,7 @@ import { ErrorBoundary } from '../ui/ErrorBoundary';
 
 export const Hero = () => {
   const [text, setText] = useState('');
-  const fullText = "Frontend Developer & UI Engineer";
+  const fullText = "Frontend Developer, UI Designer & Data Analyst";
 
   useEffect(() => {
     let i = 0;

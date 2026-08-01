@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { GlassCard } from '../ui/GlassCard';
 import { Button } from '../ui/Button';
@@ -7,7 +8,9 @@ import { motion } from 'framer-motion';
 import { TiltCard } from '../ui/TiltCard';
 import portfolioImg from '../../assets/portfolio.png';
 import userAuthImg from '../../assets/user-auth.png';
-import project2Img from '../../assets/project2.jpeg';
+import Sales_Dashboard from '../../assets/Sales_Dashboard.png';
+import HR_Dashboard from '../../assets/Hr_Dashboard.png';
+import Notes_App from '../../assets/project2.jpeg';
 
 const projects = [
   {
@@ -31,15 +34,36 @@ const projects = [
   {
     title: 'Notes WebApp',
     description: 'A full-featured notes management application for creating, editing, organizing, and deleting personal notes. Features a clean UI with real-time updates and a fast backend API.',
-    image: project2Img,
+    image: Notes_App,
     tags: ['JavaScript', 'Tailwind', 'FastAPI'],
     featured: false,
     liveDemo: '#',
     github: 'https://github.com/Mahakal05T/Notes-App.git',
+  },
+  {
+    title: 'Sales Dashboard',
+    description: 'An interactive Power BI dashboard designed for tracking key sales metrics, revenue growth, and performance.',
+    image: Sales_Dashboard, 
+    tags: ['Power BI', 'Data Analysis', 'Sales'],
+    featured: false,
+    liveDemo: '#',
+    github: '#',
+  },
+  {
+    title: 'HR Dashboard',
+    description: 'A comprehensive Power BI dashboard for analyzing human resources data, employee retention, and demographics.',
+    image: HR_Dashboard, 
+    tags: ['Power BI', 'Data Analysis', 'HR'],
+    featured: false,
+    liveDemo: '#',
+    github: '#',
   }
 ];
 
 export const Projects = () => {
+  const [showAll, setShowAll] = useState(false);
+  const displayedProjects = showAll ? projects : projects.slice(0, 3);
+
   return (
     <section id="projects" className="py-24 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
@@ -49,7 +73,7 @@ export const Projects = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 40 }}
@@ -136,6 +160,18 @@ export const Projects = () => {
             </motion.div>
           ))}
         </div>
+
+        {projects.length > 3 && (
+          <div className="mt-16 flex justify-center">
+            <Button 
+              variant="gradient" 
+              className="py-3 px-8 text-base font-semibold"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? 'Show Less' : 'See More Projects'}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
