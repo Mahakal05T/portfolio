@@ -25,9 +25,11 @@ def create_app(config_class=Config):
     # Register blueprints
     from routes.contact import bp as contact_bp
     from routes.admin import bp as admin_bp
+    from routes.analytics import bp as analytics_bp
     
     app.register_blueprint(contact_bp, url_prefix='/api/contact')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
+    app.register_blueprint(analytics_bp, url_prefix='/api/analytics')
 
     # Ensure tables are created
     with app.app_context():
