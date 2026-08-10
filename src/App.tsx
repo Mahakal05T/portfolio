@@ -4,10 +4,12 @@ import { AnimatedBackground } from './components/ui/AnimatedBackground';
 import { CursorGlow } from './components/ui/CursorGlow';
 import { Portfolio } from './components/sections/Portfolio';
 import { Admin } from './components/sections/Admin';
+import { VisitorTracker } from './components/analytics/VisitorTracker';
 
 function App() {
   return (
     <div className="min-h-screen text-gray-200">
+      <VisitorTracker />
       <Toaster 
         position="bottom-right"
         toastOptions={{

@@ -46,4 +46,14 @@ export const submitContact = async (data: {
   return response.data;
 };
 
+export const registerVisitor = async (visitorId: string): Promise<{ count: number }> => {
+  const response = await api.post('/analytics/visitor', { visitor_id: visitorId });
+  return response.data;
+};
+
+export const getVisitorCount = async (): Promise<{ count: number }> => {
+  const response = await api.get('/analytics/visitors/count');
+  return response.data;
+};
+
 export default api;

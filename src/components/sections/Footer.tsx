@@ -1,6 +1,7 @@
 import { Mail, ArrowUp } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
 import { FaLinkedin, FaXTwitter } from 'react-icons/fa6';
+import { VisitorCount } from '../analytics/VisitorCount';
 
 const socialLinks = [
   { icon: FiGithub, href: 'https://github.com/Mahakal05T', label: 'GitHub' },
@@ -55,6 +56,7 @@ export const Footer = () => {
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500 font-light">
           <p>© {new Date().getFullYear()} Ayush Singh. All rights reserved.</p>
+          <VisitorCount />
           <div className="flex gap-6">
             <a href="#" className="hover:text-gray-300 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-gray-300 transition-colors">Terms of Service</a>
