@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AnimatedBackground } from './components/ui/AnimatedBackground';
-import { CursorGlow } from './components/ui/CursorGlow';
 import { Portfolio } from './components/sections/Portfolio';
 import { Admin } from './components/sections/Admin';
 import { VisitorTracker } from './components/analytics/VisitorTracker';
@@ -33,7 +32,6 @@ function App() {
         }}
       />
       <AnimatedBackground />
-      <CursorGlow />
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/dashboard-panel" element={<Admin />} />
