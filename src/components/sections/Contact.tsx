@@ -12,6 +12,7 @@ import { Button } from '../ui/Button';
 export const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('');
 
   const {
     values,
@@ -56,18 +57,32 @@ export const Contact = () => {
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setSubmitErrorMessage('');
 
     try {
       await submitContact(values);
       setSubmitStatus('success');
       toast.success('Message sent successfully!');
       reset();
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error('Contact submission error:', error);
       setSubmitStatus('error');
-      const axiosError = error as { response?: { data?: { error?: string } } };
-      const errorMessage = axiosError.response?.data?.error || 'Failed to send message. Please try again.';
-      toast.error(errorMessage);
+
+      let msg = 'There was a problem sending your message. Please try again later or contact me directly via email.';
+      if (error?.response?.data?.error) {
+        msg = error.response.data.error;
+      } else if (error?.response?.data?.errors) {
+        const errObj = error.response.data.errors;
+        const firstKey = Object.keys(errObj)[0];
+        msg = errObj[firstKey] || msg;
+      } else if (error?.code === 'ECONNABORTED' || error?.message?.includes('timeout')) {
+        msg = 'Request timed out. Please check your connection and try again.';
+      } else if (error?.response?.status === 429) {
+        msg = 'Too many requests. Please wait a minute before submitting again.';
+      }
+
+      setSubmitErrorMessage(msg);
+      toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }
@@ -157,7 +172,7 @@ export const Contact = () => {
                     </div>
                     <h4 className="text-2xl font-bold text-white mb-3">Delivery Failed</h4>
                     <p className="text-gray-400 mb-8 max-w-sm">
-                      There was a problem sending your message. Please try again later or contact me directly via email.
+                      {submitErrorMessage || 'There was a problem sending your message. Please try again later or contact me directly via email.'}
                     </p>
                     <Button
                       onClick={() => setSubmitStatus('idle')}
