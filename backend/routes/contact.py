@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify
+import requests
+
 from app import limiter
 from database import db
 from models.contact import ContactMessage
@@ -40,25 +42,28 @@ def submit_contact():
         user_agent=user_agent
     )
 
+    # Save to database
+    db.session.add(new_contact)
+    db.session.commit()
+
+    # Send contact data to n8n
     try:
-        # Save to database
-        db.session.add(new_contact)
-        db.session.commit()
+        response = requests.post(
+            "https://hsuya.app.n8n.cloud/webhook/portfolio-contact",
+            json={
+                "name": name,
+                "email": email,
+                "subject": subject,
+                "message": message
+            },
+            timeout=5
+        )
 
-        # Send emails asynchronously or fire-and-forget in a real prod env
-        # Here we do it synchronously
-        send_notification_email(new_contact)
-        send_auto_reply(new_contact)
+        print("n8n response:", response.status_code, response.text)
 
-        return jsonify({
-            "message": "Message sent successfully",
-            "data": {
-                "id": new_contact.id
-            }
-        }), 201
+    except requests.RequestException as e:
+        print(f"n8n webhook error: {e}")
 
-    except Exception as e:
-        db.session.rollback()
-        # Log error in production
-        print(f"Error saving contact message: {e}")
-        return jsonify({"error": "Failed to process request"}), 500
+    # Existing email notifications
+    send_notification_email(new_contact)
+    send_auto_reply(new_contact)
